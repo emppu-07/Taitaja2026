@@ -1,41 +1,45 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    
-    //Audio
+    // INPUT
+    private PlayerControls input;
+    private Vector2 moveInput;
 
+    // AUDIO
     [Header("Audio")]
     public AudioSource DashSFX;
     public AudioSource JumpSFX;
-    // movement
+
+    // MOVEMENT
     [Header("Movement")]
     private float horizontal;
     private bool isFacingRight = true;
     private bool doubleJump;
+    private bool wasGrounded;
+
     public float walkSpeed = 7f;
     public float runSpeed = 10f;
     public float jumpingPower = 16f;
-    float doubleJumpPower;
+    private float doubleJumpPower;
 
-    // dashing
-    [Header("dashing")]
+    // DASHING
+    [Header("Dashing")]
     private bool canDash = true;
     private bool isDashing;
     public float dashingPower = 24f;
     public float dashingTime = 0.2f;
     public float dashingCooldown = 1f;
 
-    // sliding
-    [Header("sliding")]
+    // WALL SLIDE
+    [Header("Wall Sliding")]
     private bool isWallSliding;
     public float wallSlidingSpeed = 2f;
 
-    // wall jumping
-    [Header("wall jumping")]
+    // WALL JUMP
+    [Header("Wall Jumping")]
     private bool isWallJumping;
     private float wallJumpingDirection;
     public float wallJumpingTime = 0.2f;
@@ -43,99 +47,122 @@ public class PlayerController : MonoBehaviour
     public float wallJumpingDuration = 0.4f;
     public Vector2 wallJumpingPower = new Vector2(8f, 16f);
 
-
+    // REFERENCES
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
-
-    [SerializeField] private TrailRenderer tr;
-
     [SerializeField] private Transform wallCheck;
     [SerializeField] private LayerMask wallLayer;
+    [SerializeField] private TrailRenderer tr;
 
+    private void Awake()
+    {
+        input = new PlayerControls();
+    }
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
+    {
+        input.Player.Enable();
+        input.Player.Jump.performed += OnJump;
+        input.Player.Dash.performed += OnDash;
+    }
+
+    private void OnDisable()
+    {
+        input.Player.Jump.performed -= OnJump;
+        input.Player.Dash.performed -= OnDash;
+        input.Player.Disable();
+    }
+
+    private void Start()
     {
         doubleJumpPower = jumpingPower * 0.75f;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (isDashing)
             return;
 
-        //move control
-        horizontal = Input.GetAxisRaw("Horizontal");
+        moveInput = input.Player.Move.ReadValue<Vector2>();
+        horizontal = moveInput.x;
 
-        //jump
-        if (Input.GetButtonDown("Jump") && IsGrounded())
-            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-            JumpSFX.Play();
-
-        //double jump
-        if (Input.GetButtonDown("Jump") && !IsGrounded() && doubleJump)
+        bool grounded = IsGrounded();
+        if (grounded && !wasGrounded)
         {
-            rb.velocity = new Vector2(rb.velocity.x, doubleJumpPower);
-            doubleJump = false;
-            JumpSFX.Play();
-        }
-        
-
-        //jump power
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-
-        //can double jump
-        if (IsGrounded())
             doubleJump = true;
-
-        if (Input.GetButtonDown("Dash") && canDash)
-            StartCoroutine(Dash());
+        }
+        wasGrounded = grounded;
 
         WallSlide();
         WallJump();
 
         if (!isWallJumping)
-        {
             Flip();
-        }
-        
-
     }
+
     private void FixedUpdate()
     {
-        if (!isWallJumping)
-        {
-            if (isDashing)
-                return;
+        if (isDashing || isWallJumping)
+            return;
 
-            if (Input.GetButton("Run") && IsGrounded())
-                rb.velocity = new Vector2(horizontal * runSpeed, rb.velocity.y);
-            else
-                rb.velocity = new Vector2(horizontal * walkSpeed, rb.velocity.y);
+        float speed = input.Player.Run.IsPressed() && IsGrounded()
+            ? runSpeed
+            : walkSpeed;
+
+        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+    }
+
+
+    private void OnJump(InputAction.CallbackContext ctx)
+    {
+        if (isDashing)
+            return;
+
+        if (IsGrounded())
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            JumpSFX?.Play();
+        }
+        else if (doubleJump)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, doubleJumpPower);
+            doubleJump = false;
+            JumpSFX?.Play();
         }
     }
+
+    private void OnDash(InputAction.CallbackContext ctx)
+    {
+        if (canDash)
+            StartCoroutine(Dash());
+    }
+
+
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
-    private void Flip()
-    {
-        if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
-        {
-            isFacingRight = !isFacingRight;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
-        }
-    }
-
     private bool IsWalled()
     {
         return Physics2D.OverlapCircle(wallCheck.position, 0.2f, wallLayer);
+    }
+
+    private void WallSlide()
+    {
+        if (IsWalled() && !IsGrounded() && horizontal != 0f)
+        {
+            isWallSliding = true;
+            rb.velocity = new Vector2(
+                rb.velocity.x,
+                Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue)
+            );
+        }
+        else
+        {
+            isWallSliding = false;
+        }
     }
 
     private void WallJump()
@@ -145,7 +172,6 @@ public class PlayerController : MonoBehaviour
             isWallJumping = false;
             wallJumpingDirection = -transform.localScale.x;
             wallJumpingCounter = wallJumpingTime;
-
             CancelInvoke(nameof(StopWallJumping));
         }
         else
@@ -153,18 +179,22 @@ public class PlayerController : MonoBehaviour
             wallJumpingCounter -= Time.deltaTime;
         }
 
-        if(Input.GetButtonDown("Jump") && wallJumpingCounter > 0f)
+        if (wallJumpingCounter > 0f && input.Player.Jump.triggered)
         {
             isWallJumping = true;
-            rb.velocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
+            rb.velocity = new Vector2(
+                wallJumpingDirection * wallJumpingPower.x,
+                wallJumpingPower.y
+            );
+
             wallJumpingCounter = 0f;
 
-            if(transform.localScale.x != wallJumpingDirection)
+            if (transform.localScale.x != wallJumpingDirection)
             {
                 isFacingRight = !isFacingRight;
-                Vector3 localScale = transform.localScale;
-                localScale.x *= -1f;
-                transform.localScale = localScale;
+                Vector3 scale = transform.localScale;
+                scale.x *= -1f;
+                transform.localScale = scale;
             }
 
             Invoke(nameof(StopWallJumping), wallJumpingDuration);
@@ -176,16 +206,14 @@ public class PlayerController : MonoBehaviour
         isWallJumping = false;
     }
 
-    private void WallSlide()
+    private void Flip()
     {
-        if (IsWalled() && !IsGrounded() && horizontal != 0f)
+        if ((isFacingRight && horizontal < 0f) || (!isFacingRight && horizontal > 0f))
         {
-            isWallSliding = true;
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
-        }
-        else
-        {
-            isWallSliding = false;
+            isFacingRight = !isFacingRight;
+            Vector3 scale = transform.localScale;
+            scale.x *= -1f;
+            transform.localScale = scale;
         }
     }
 
@@ -193,15 +221,20 @@ public class PlayerController : MonoBehaviour
     {
         canDash = false;
         isDashing = true;
+
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+
         tr.emitting = true;
-        DashSFX.Play();
+        DashSFX?.Play();
+
         yield return new WaitForSeconds(dashingTime);
+
         tr.emitting = false;
         rb.gravityScale = originalGravity;
         isDashing = false;
+
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
     }
