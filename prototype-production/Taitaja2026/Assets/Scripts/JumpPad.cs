@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class JumpPad : MonoBehaviour
 {
-    private float bounce = 20f;
+    private float bounce = 20f; //adjust jump height
 
     private void OnCollisionEnter(Collision collision)
     {
