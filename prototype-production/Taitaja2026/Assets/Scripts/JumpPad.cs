@@ -6,7 +6,9 @@ public class JumpPad : MonoBehaviour
 {
     private float bounce = 20f; //adjust jump height
 
-    private void OnCollisionEnter(Collision collision)
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("Player"))
         {
