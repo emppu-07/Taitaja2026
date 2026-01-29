@@ -1,0 +1,4 @@
+Background music: "Drum and Bass Groove Loop" by digimistic, downloaded from freesound.org: https://freesound.org/people/digimistic/sounds/704253/
+Dash sound: "dash.ogg" by perduuus, downloaded from freesound.org: https://freesound.org/people/perduuus/sounds/701794/
+Jump sound: "Text-Message or Videogame-Jump" by CmdRobot, downloaded from freesound.org: https://freesound.org/people/CmdRobot/sounds/264828/
+Font: "Kaph" by GGBotNet, downloaded from Itch.io: https://ggbot.itch.io/kaph-font
