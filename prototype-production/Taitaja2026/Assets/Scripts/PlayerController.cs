@@ -1,9 +1,11 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    string currentSceneName;
     // INPUT
     private PlayerControls input;
     private Vector2 moveInput;
@@ -81,6 +83,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+
+        currentSceneName = SceneManager.GetActiveScene().name;
         if (isDashing)
             return;
 
@@ -237,5 +241,17 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        if(other.gameObject.CompareTag("Lava"))
+        {
+            Debug.Log("DEAD");
+            SceneManager.LoadScene(currentSceneName);
+        }
+
+        if (other.gameObject.CompareTag("FINISH")){
+            //SceneManager.LoadScene("MainMenu");
+        }
     }
 }
