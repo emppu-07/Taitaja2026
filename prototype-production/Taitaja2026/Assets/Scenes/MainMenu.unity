@@ -554,10 +554,10 @@ MonoBehaviour:
   m_enableVertexGradient: 1
   m_colorMode: 2
   m_fontColorGradient:
-    topLeft: {r: 0.990566, g: 0.59924203, b: 0.014017418, a: 1}
-    topRight: {r: 0.990566, g: 0.59924203, b: 0.014017418, a: 1}
-    bottomLeft: {r: 0.5188679, g: 0.09925624, b: 0, a: 1}
-    bottomRight: {r: 0.5188679, g: 0.09925624, b: 0, a: 1}
+    topLeft: {r: 0.9843137, g: 0.54509807, b: 0.14117648, a: 1}
+    topRight: {r: 0.9843137, g: 0.54509807, b: 0.14117648, a: 1}
+    bottomLeft: {r: 0.6039216, g: 0.011764706, b: 0.11764706, a: 1}
+    bottomRight: {r: 0.6039216, g: 0.011764706, b: 0.11764706, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -630,7 +630,7 @@ GameObject:
   - component: {fileID: 572398507}
   - component: {fileID: 572398506}
   m_Layer: 5
-  m_Name: StartButton (2)
+  m_Name: QuitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -678,7 +678,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
-    m_HighlightedColor: {r: 0.7830189, g: 0.4685535, b: 0, a: 1}
+    m_HighlightedColor: {r: 0.9843137, g: 0.54509807, b: 0.14117648, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -1591,7 +1591,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
-    m_HighlightedColor: {r: 0.7830189, g: 0.4685535, b: 0, a: 1}
+    m_HighlightedColor: {r: 0.9843137, g: 0.54509807, b: 0.14117648, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -1785,6 +1785,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1517426335}
   m_CullTransparentMesh: 1
+--- !u!1 &1632425371
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1632425372}
+  m_Layer: 0
+  m_Name: MainMenuController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1632425372
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1632425371}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.26517624, y: -3.0485063, z: 4.0949154}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1791292206
 GameObject:
   m_ObjectHideFlags: 0
@@ -1798,7 +1829,7 @@ GameObject:
   - component: {fileID: 1791292209}
   - component: {fileID: 1791292208}
   m_Layer: 5
-  m_Name: StartButton (1)
+  m_Name: HSButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1846,7 +1877,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
-    m_HighlightedColor: {r: 0.7830189, g: 0.4685535, b: 0, a: 1}
+    m_HighlightedColor: {r: 0.9843137, g: 0.54509807, b: 0.14117648, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -1914,3 +1945,4 @@ SceneRoots:
   - {fileID: 979054012}
   - {fileID: 1235273693}
   - {fileID: 582698491}
+  - {fileID: 1632425372}
