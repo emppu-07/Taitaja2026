@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -136,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Spritesheet_ent_0
+      name: Spritesheet_ent_Q
       rect:
         serializedVersion: 2
         x: 0
@@ -150,14 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f2f516725749ab345b6e9ede0e8d6864
-      internalID: -331091121
+      spriteID: 28928000ba75ea4408b7517f54df775a
+      internalID: 1525071260
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spritesheet_ent_1
+      name: Spritesheet_ent_player
       rect:
         serializedVersion: 2
         x: 16
@@ -171,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f64a41601f15c56409ec2945c5584e9a
-      internalID: -1026617170
+      spriteID: bf189b7b1afb33b489a9885299ed7e4e
+      internalID: 1919162271
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spritesheet_ent_2
+      name: Spritesheet_ent_platform
       rect:
         serializedVersion: 2
         x: 32
@@ -192,14 +192,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a2d9aa54a27abee468f1044952529eb2
-      internalID: 579462707
+      spriteID: 6dbd6064bd67a924581c81272ecde0fe
+      internalID: -865849450
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spritesheet_ent_3
+      name: Spritesheet_ent_pillar1
       rect:
         serializedVersion: 2
         x: 48
@@ -213,14 +213,77 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce9f468fe9e374a4abba51123b3c7430
-      internalID: -957269773
+      spriteID: da012f5fbf0c1b4439a991357ac212c4
+      internalID: -1492315166
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spritesheet_ent_4
+      name: Spritesheet_ent_pillar2
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d45dbd1c937e0e241b3e5186562303fd
+      internalID: -1008486456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet_ent_goal
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b326b3d4318bf94cbfbd93b1ef07c13
+      internalID: -1340473401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet_ent_jump
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b618890fe619a454998c4e84c4e0c247
+      internalID: -2038264120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet_ent_something
       rect:
         serializedVersion: 2
         x: 0
@@ -234,71 +297,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0cd8ef8942c36ab4b991596b72ee3cf2
-      internalID: -1849605276
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spritesheet_ent_5
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7a5f4e210b82cdd41971fbbe76d5fcd5
-      internalID: -1467625183
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spritesheet_ent_6
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5d0e2047867a1174481530368877feeb
-      internalID: 342924133
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spritesheet_ent_7
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f47bc9356f2bcf940bebd1daddda1647
-      internalID: 432749712
+      spriteID: 90cb4ec76fc8b6e42941f4372affde4b
+      internalID: -1484611437
       vertices: []
       indices: 
       edges: []
@@ -314,14 +314,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Spritesheet_ent_0: -331091121
-      Spritesheet_ent_1: -1026617170
-      Spritesheet_ent_2: 579462707
-      Spritesheet_ent_3: -957269773
-      Spritesheet_ent_4: -1849605276
-      Spritesheet_ent_5: -1467625183
-      Spritesheet_ent_6: 342924133
-      Spritesheet_ent_7: 432749712
+      Spritesheet_ent_Q: 1525071260
+      Spritesheet_ent_goal: -1340473401
+      Spritesheet_ent_jump: -2038264120
+      Spritesheet_ent_pillar1: -1492315166
+      Spritesheet_ent_pillar2: -1008486456
+      Spritesheet_ent_platform: -865849450
+      Spritesheet_ent_player: 1919162271
+      Spritesheet_ent_something: -1484611437
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
